@@ -797,7 +797,7 @@
       <h2>Main Conclusion</h2>
       <div class="note">
         <p>The site is in a good technical position after the schema cleanup: sampled pages now expose one Yoast JSON-LD graph, useful citation and user-triggered agents can fetch public content, the sitemap is reachable, and <code>/llms.txt</code> is already present.</p>
-        <p>The main gap is strategic, not mechanical: <code>robots.txt</code> still has no explicit AI crawler policy. Training bots, citation bots, and user-triggered agents currently look the same from the public robots file. The next decision is whether Elisa wants training access blocked, allowed, or selectively limited while keeping citation/search and user-triggered agents accessible.</p>
+        <p>The main gap is strategic, not mechanical: <code>robots.txt</code> still has no explicit AI crawler policy. The public robots file does not distinguish training bots, citation bots, and user-triggered agents. Live checks and logs show mixed training-bot behavior, so the next decision is whether Elisa wants training access blocked, allowed, or selectively limited while keeping citation/search and user-triggered agents accessible.</p>
       </div>
     </section>
     </div>
@@ -839,8 +839,8 @@
         <span class="pill warn">Needs decision</span>
         <h3>Training bot policy</h3>
       </div>
-      <p>Training-style bot user agents can currently fetch sampled pages (10 successful checks).</p>
-      <p class="action"><strong>Action:</strong> Decide whether to allow, block, or rate-limit training bots. Document that decision in robots.txt and WAF rules.</p>
+      <p>Training access is mixed: GPTBot and CCBot returned 200 on sampled pages, while ClaudeBot returned 403. robots.txt still does not explain this policy.</p>
+      <p class="action"><strong>Action:</strong> Decide whether to allow, block, or rate-limit each training crawler family, then document the decision in robots.txt and WAF rules.</p>
     </article>
   
     <article class="finding pass">
@@ -866,8 +866,8 @@
         <span class="pill warn">Needs decision</span>
         <h3>Measurement</h3>
       </div>
-      <p>Referral/citation tracking cannot be confirmed from public HTML alone.</p>
-      <p class="action"><strong>Action:</strong> Create analytics segments for AI referrals, crawler share, engagement by referral, and conversions by referral.</p>
+      <p>Public HTML alone cannot confirm measurement setup, but one month of backend logs now confirms AI referrers and crawler activity.</p>
+      <p class="action"><strong>Action:</strong> Keep the log-based view and add analytics segments for AI referrals, crawler share, engagement by referral, and conversions by referral.</p>
     </article>
   
       </div>
@@ -1168,7 +1168,7 @@ Sitemap: https://www.nuvoledibellezza.com/pt/sitemap_index.xml</code></pre>
     <li class="check-item done">
       <span class="check-box" aria-hidden="true">✓</span>
       <div class="check-copy">
-        <p class="check-title">Add llms.txt and referrer tracking</p>
+        <p class="check-title">Add llms.txt and log-based referrer analysis</p>
         <p class="check-detail">Verified llms.txt and added one-month log-based AI referrer and crawler analysis to this report.</p>
         <span class="check-status">Done by Andrew</span>
       </div>
